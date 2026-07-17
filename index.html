@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Irfan ♥ Nisa</title>
+<meta name="description" content="Shared calendar for Irfan and Nisa">
+<meta name="theme-color" content="#F7F5F1" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#1B1926" media="(prefers-color-scheme: dark)">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icon-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Irfan ♥ Nisa">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="wordmark">
+    <span class="wm-irfan">Irfan</span><span class="wm-amp">&</span><span class="wm-nisa">Nisa</span>
+  </div>
+  <div class="sync-chip" id="syncChip" title="Sync status">
+    <span class="sync-dot" id="syncDot"></span><span id="syncLabel">syncing</span>
+  </div>
+</header>
+
+<main>
+  <section class="upcoming" aria-label="Upcoming activities">
+    <h2 class="section-title">Coming up</h2>
+    <div id="upcomingList" class="upcoming-list"></div>
+  </section>
+
+  <section class="calendar" aria-label="Calendar">
+    <div class="cal-head">
+      <button class="cal-nav" id="prevMonth" aria-label="Previous month">‹</button>
+      <button class="cal-title" id="calTitle" title="Jump to today"></button>
+      <button class="cal-nav" id="nextMonth" aria-label="Next month">›</button>
+    </div>
+    <div class="cal-dow">
+      <span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span class="wkend">Sat</span><span class="wkend">Sun</span>
+    </div>
+    <div class="cal-grid" id="calGrid"></div>
+    <div class="cal-legend">
+      <span class="lg"><i class="dot dot-irfan"></i>Irfan</span>
+      <span class="lg"><i class="dot dot-nisa"></i>Nisa</span>
+      <span class="lg"><i class="dot dot-both"></i>Us two</span>
+    </div>
+  </section>
+</main>
+
+<button class="fab" id="fabAdd" aria-label="Add activity">+</button>
+
+<!-- Day sheet -->
+<div class="sheet-backdrop" id="dayBackdrop" hidden></div>
+<div class="sheet" id="daySheet" role="dialog" aria-modal="true" hidden>
+  <div class="sheet-handle"></div>
+  <h3 class="sheet-title" id="daySheetTitle"></h3>
+  <div class="day-events" id="dayEvents"></div>
+  <button class="btn btn-primary" id="dayAddBtn">Add for this day</button>
+</div>
+
+<!-- Add / edit sheet -->
+<div class="sheet-backdrop" id="formBackdrop" hidden></div>
+<div class="sheet" id="formSheet" role="dialog" aria-modal="true" hidden>
+  <div class="sheet-handle"></div>
+  <h3 class="sheet-title" id="formTitle">New activity</h3>
+  <form id="eventForm" autocomplete="off">
+    <input type="hidden" id="fId">
+    <label class="field">
+      <span>What's happening?</span>
+      <input type="text" id="fTitle" required maxlength="80" placeholder="Dinner at mama's, dentist, movie night…">
+    </label>
+    <div class="owner-pick" id="ownerPick" role="radiogroup" aria-label="Whose activity">
+      <button type="button" class="owner-btn ob-irfan" data-owner="irfan">Irfan</button>
+      <button type="button" class="owner-btn ob-nisa" data-owner="nisa">Nisa</button>
+      <button type="button" class="owner-btn ob-both selected" data-owner="both">Us two</button>
+    </div>
+    <div class="field-row">
+      <label class="field">
+        <span>Date</span>
+        <input type="date" id="fDate" required>
+      </label>
+      <label class="field">
+        <span>Time <em>(optional)</em></span>
+        <input type="time" id="fTime">
+      </label>
+    </div>
+    <label class="field">
+      <span>Notes <em>(optional)</em></span>
+      <textarea id="fNotes" rows="2" maxlength="300" placeholder="Address, reminders, anything"></textarea>
+    </label>
+    <div class="form-actions">
+      <button type="button" class="btn btn-danger" id="fDelete" hidden>Delete</button>
+      <button type="submit" class="btn btn-primary" id="fSave">Save</button>
+    </div>
+  </form>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
