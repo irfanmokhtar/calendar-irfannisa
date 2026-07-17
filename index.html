@@ -17,6 +17,12 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
+<script>
+  (function () {
+    var t = localStorage.getItem("irfannisa.theme.v1");
+    if (t) document.documentElement.setAttribute("data-theme", t);
+  })();
+</script>
 </head>
 <body>
 
@@ -24,8 +30,11 @@
   <div class="wordmark">
     <span class="wm-irfan">Irfan</span><span class="wm-amp">&</span><span class="wm-nisa">Nisa</span>
   </div>
-  <div class="sync-chip" id="syncChip" title="Sync status">
-    <span class="sync-dot" id="syncDot"></span><span id="syncLabel">syncing</span>
+  <div class="topbar-right">
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle light/dark theme">◐</button>
+    <div class="sync-chip" id="syncChip" title="Sync status">
+      <span class="sync-dot" id="syncDot"></span><span id="syncLabel">syncing</span>
+    </div>
   </div>
 </header>
 

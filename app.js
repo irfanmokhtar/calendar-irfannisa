@@ -7,6 +7,7 @@
 // ---------- sync backend ----------
 const BIN_URL = "https://api.npoint.io/7ca1ecb241f95157a0f1";
 const LS_KEY = "irfannisa.events.v1";
+const THEME_KEY = "irfannisa.theme.v1";
 const POLL_MS = 60000;
 
 // ---------- state ----------
@@ -298,8 +299,28 @@ function hide(sheetId, backdropId) {
   $(backdropId).hidden = true;
 }
 
+// ---------- theme ----------
+function applyTheme(mode) {
+  if (mode) document.documentElement.setAttribute("data-theme", mode);
+  else document.documentElement.removeAttribute("data-theme");
+  $("themeToggle").textContent = mode === "dark" ? "☾" : mode === "light" ? "☀" : "◐";
+}
+
+function initTheme() {
+  const saved = localStorage.getItem(THEME_KEY);
+  applyTheme(saved);
+  $("themeToggle").addEventListener("click", () => {
+    const sysDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+    const current = localStorage.getItem(THEME_KEY) || (sysDark ? "dark" : "light");
+    const next = current === "dark" ? "light" : "dark";
+    localStorage.setItem(THEME_KEY, next);
+    applyTheme(next);
+  });
+}
+
 // ---------- wire up ----------
 function init() {
+  initTheme();
   const now = new Date();
   viewYear = now.getFullYear();
   viewMonth = now.getMonth();
