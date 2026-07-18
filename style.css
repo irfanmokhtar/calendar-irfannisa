@@ -20,20 +20,6 @@
   --body: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --paper: #1B1926;
-    --card: #26233A;
-    --ink: #EDEAF5;
-    --ink-soft: #9D98B5;
-    --line: #37334D;
-    --irfan-soft: #2A3559;
-    --nisa-soft: #4A2733;
-    --today: #D9AC4F;
-    --shadow: 0 6px 24px rgba(0, 0, 0, .35);
-  }
-}
-
 :root[data-theme="dark"] {
   --paper: #1B1926;
   --card: #26233A;

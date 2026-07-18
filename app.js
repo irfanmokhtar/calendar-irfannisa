@@ -310,8 +310,7 @@ function initTheme() {
   const saved = localStorage.getItem(THEME_KEY);
   applyTheme(saved);
   $("themeToggle").addEventListener("click", () => {
-    const sysDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-    const current = localStorage.getItem(THEME_KEY) || (sysDark ? "dark" : "light");
+    const current = localStorage.getItem(THEME_KEY) || "light";
     const next = current === "dark" ? "light" : "dark";
     localStorage.setItem(THEME_KEY, next);
     applyTheme(next);
