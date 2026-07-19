@@ -11,6 +11,7 @@
   --irfan-soft: #E3E9FC;
   --nisa: #E54666;
   --nisa-soft: #FCE5EA;
+  --both-soft: #F0E7F7;
   --both-grad: linear-gradient(135deg, #3E63DD 0%, #A15ACb 52%, #E54666 100%);
   --today: #B88A2E;
   --danger: #C0392B;
@@ -28,6 +29,7 @@
   --line: #37334D;
   --irfan-soft: #2A3559;
   --nisa-soft: #4A2733;
+  --both-soft: #3A2F52;
   --today: #D9AC4F;
   --shadow: 0 6px 24px rgba(0, 0, 0, .35);
 }
@@ -40,6 +42,7 @@
   --line: #E6E2DA;
   --irfan-soft: #E3E9FC;
   --nisa-soft: #FCE5EA;
+  --both-soft: #F0E7F7;
   --today: #B88A2E;
   --shadow: 0 6px 24px rgba(38, 35, 58, .10);
 }
@@ -316,6 +319,17 @@ main { padding: 6px 16px 0; max-width: 560px; margin: 0 auto; }
   color: #fff;
   font-weight: 700;
 }
+
+/* days with events get a tinted box; single-owner days pick up that owner's hue */
+.cal-cell.has-events {
+  background: var(--ev-fill, var(--line));
+}
+.cal-cell.has-events.other { opacity: .5; }
+.cal-cell.ev-irfan { --ev-fill: var(--irfan-soft); }
+.cal-cell.ev-nisa { --ev-fill: var(--nisa-soft); }
+.cal-cell.ev-both,
+.cal-cell.ev-mixed { --ev-fill: var(--both-soft); }
+.cal-cell.today.has-events .dnum { box-shadow: 0 0 0 2px var(--card); }
 
 .cell-dots { display: flex; gap: 3px; height: 6px; }
 .dot {

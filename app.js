@@ -233,13 +233,17 @@ function renderCalendar() {
     cell.innerHTML = `<span class="dnum">${d.getDate()}</span><span class="cell-dots"></span>`;
     const dots = cell.querySelector(".cell-dots");
     const evs = eventsOn(dk);
-    const owners = [...new Set(evs.map((e) => e.owner))].slice(0, 3);
-    for (const o of owners) {
+    const owners = [...new Set(evs.map((e) => e.owner))];
+    if (evs.length) {
+      cell.classList.add("has-events");
+      cell.classList.add(owners.length === 1 ? "ev-" + owners[0] : "ev-mixed");
+    }
+    for (const o of owners.slice(0, 3)) {
       const i2 = document.createElement("i");
       i2.className = "dot dot-" + o;
       dots.appendChild(i2);
     }
-    if (evs.length > 3) {
+    if (owners.length > 3) {
       const more = document.createElement("i");
       more.className = "dot-more";
       more.textContent = "+";
