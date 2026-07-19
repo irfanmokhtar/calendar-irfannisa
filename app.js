@@ -34,6 +34,20 @@ function fmtDayLabel(dateKey) {
   return base;
 }
 
+function daysUntil(dateKey) {
+  const d = new Date(dateKey + "T00:00:00");
+  const now = new Date();
+  const midnight = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+  return Math.round((d - midnight) / 864e5);
+}
+
+function fmtCountdown(dateKey) {
+  const n = daysUntil(dateKey);
+  if (n <= 0) return "Today";
+  if (n === 1) return "Tomorrow";
+  return `${n} days`;
+}
+
 function fmtTime(t) {
   if (!t) return "";
   const [h, m] = t.split(":").map(Number);
@@ -146,7 +160,7 @@ function eventsOn(dateKey) {
 
 const OWNER_LABEL = { irfan: "Irfan", nisa: "Nisa", both: "Us two" };
 
-function eventCard(e) {
+function eventCard(e, showCountdown) {
   const btn = document.createElement("button");
   btn.className = "up-card";
   btn.type = "button";
@@ -160,7 +174,8 @@ function eventCard(e) {
         ${meta.length ? `<span>${meta.join(" · ")}</span>` : ""}
       </span>
       ${e.notes ? `<span class="up-notes"></span>` : ""}
-    </span>`;
+    </span>
+    ${showCountdown ? `<span class="up-countdown"><b>${fmtCountdown(e.date)}</b><small>${daysUntil(e.date) > 1 ? "left" : ""}</small></span>` : ""}`;
   btn.querySelector(".up-title").textContent = e.title;
   if (e.notes) btn.querySelector(".up-notes").textContent = e.notes;
   btn.addEventListener("click", () => openForm(e));
@@ -193,7 +208,7 @@ function renderUpcoming() {
       lbl.textContent = fmtDayLabel(e.date);
       list.appendChild(lbl);
     }
-    list.appendChild(eventCard(e));
+    list.appendChild(eventCard(e, true));
   }
 }
 
